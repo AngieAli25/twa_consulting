@@ -3,3 +3,5 @@
 
 # Claude Code (config locale/personale)
 .claude/settings.local.json
+.vercel
+.env*
