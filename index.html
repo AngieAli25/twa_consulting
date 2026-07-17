@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TWA Consulting — Consulenza esclusiva per hotel e ristoranti di lusso</title>
+  <meta name="description" content="Consulenza esclusiva per l'apertura di hotel e ristoranti di lusso a Milano e nel Nord Italia. Il network, il territorio e l'esperienza diretta di Filippo Mori.">
+
+  <!-- Font: Monda (titoli, Google Fonts) + DM Sans (placeholder di Grift, testo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       TWA CONSULTING — Home
+       Design system dal brief · layout dal modello di riferimento
+       ============================================================ */
+    :root{
+      --sand:#F9DDB1;
+      --sand-light:#FCECCC;
+      --amber:#E88504;
+      --burnt:#D24E01;
+      --dark:#1C1109;
+      --white:#FFFFFF;
+      --line:rgba(28,17,9,.14);
+      --maxw:1560px;
+      --pad:clamp(1rem,2.5vw,1.25rem);
+      --nav-h:78px;
+      --font-display:'Monda',system-ui,sans-serif;
+      --font-body:'DM Sans',system-ui,sans-serif;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:var(--font-body);
+      font-weight:400;
+      color:var(--dark);
+      background:var(--sand);
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+
+    /* --- Tipografia --- */
+    .display{
+      font-family:var(--font-display);
+      font-weight:700;
+      line-height:.92;
+      letter-spacing:-.03em;
+      text-transform:lowercase;
+    }
+    /* Titoli in minuscolo ma con iniziale maiuscola */
+    .display::first-letter,
+    .srow__title::first-letter,
+    .proof__quote::first-letter{text-transform:uppercase}
+    .eyebrow{
+      font-family:var(--font-display);
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.28em;
+      font-size:clamp(.56rem,.9vw,.72rem);
+    }
+
+    /* --- Skip link (accessibilità) --- */
+    .skip{
+      position:absolute;left:-999px;top:0;z-index:200;
+      background:var(--dark);color:var(--white);padding:.75rem 1.25rem;border-radius:0 0 8px 0;
+    }
+    .skip:focus{left:0}
+    :focus-visible{outline:2px solid var(--burnt);outline-offset:3px}
+
+    /* --- Bottoni --- */
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+      letter-spacing:.14em;font-size:.7rem;
+      padding:.95rem 1.6rem;border-radius:999px;
+      border:1.5px solid var(--dark);
+      transition:background .25s ease,color .25s ease,transform .25s ease;
+      cursor:pointer;white-space:nowrap;
+    }
+    .btn .dot{width:.5rem;height:.5rem;border-radius:50%;background:currentColor;transition:transform .25s ease}
+    .btn--dark{background:var(--dark);color:var(--white);border-color:var(--dark)}
+    .btn--dark:hover{background:var(--burnt);border-color:var(--burnt)}
+    .btn--ghost{background:transparent;color:var(--dark)}
+    .btn--ghost:hover{background:var(--dark);color:var(--white)}
+    .btn--amber{background:var(--burnt);color:var(--white);border-color:var(--burnt)}
+    .btn--amber:hover{background:var(--dark);border-color:var(--dark)}
+    .btn--bordeaux{background:#5e1a16;color:var(--white);border-color:#5e1a16}
+    .btn--bordeaux:hover{background:#7a231e;border-color:#7a231e}
+    .btn:hover .dot{transform:scale(1.4)}
+
+    /* ============================================================
+       NAV
+       ============================================================ */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      background:var(--sand);box-shadow:0 1px 0 var(--line);
+      transition:background .3s ease,box-shadow .3s ease;
+    }
+    .nav__inner{
+      max-width:var(--maxw);margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.1rem var(--pad);
+    }
+    .nav.scrolled{background:var(--sand);box-shadow:0 1px 0 var(--line)}
+    .nav__logo{display:inline-flex;align-items:center;line-height:0}
+    .logo-svg{display:block;height:42px;width:auto}
+    .logo-svg--light path[fill="#5E1917"]{fill:var(--sand)}
+    .logo-svg--light path[fill="#D24E01"]{fill:var(--amber)}
+    .nav__links{display:flex;gap:2rem;align-items:center}
+    .nav__links a{
+      font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+      letter-spacing:.16em;font-size:.66rem;position:relative;padding:.25rem 0;
+    }
+    .nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--burnt);transition:width .25s ease}
+    .nav__links a:hover::after{width:100%}
+    .nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:.5rem}
+    .nav__burger span{width:26px;height:2px;background:var(--dark);display:block}
+    /* Switcher versioni home */
+    .nav__version{display:inline-flex;align-items:center;gap:.15rem;padding:.2rem;border:1px solid var(--line);border-radius:999px}
+    .nav__version a,.nav__version span{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.62rem;padding:.3rem .7rem;border-radius:999px;line-height:1;color:var(--dark);text-decoration:none}
+    .nav__version a::after{display:none}
+    .nav__version .is-current{background:var(--burnt);color:#fff}
+    .nav__version a:hover{background:var(--sand-light)}
+
+    /* ============================================================
+       1 · HERO
+       ============================================================ */
+    .hero{background:var(--white)}
+    .hero__inner{
+      max-width:var(--maxw);width:100%;margin:0 auto;
+      padding:calc(var(--nav-h) + 100px) var(--pad) 100px;
+    }
+    .hero__geo{color:var(--burnt);margin-bottom:1.4rem}
+    .hero__title{
+      font-size:clamp(2.4rem,7vw,6.5rem);
+      line-height:.88;
+      color:#5e1a16;
+      text-transform:lowercase;
+    }
+    .hero__row{
+      display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;
+      margin-top:2rem;
+    }
+    .hero__lead{max-width:34ch;font-size:.98rem;color:#3a2a1b;line-height:1.6}
+    .hero__actions{display:flex;gap:.75rem;flex-wrap:wrap}
+    .hero__media{
+      position:relative;height:clamp(280px,42vh,520px);width:100%;
+      background:#120b06 url("img/hero-web.jpg") center/cover no-repeat;
+      overflow:hidden;
+    }
+    .ph-note{position:relative;z-index:2}
+
+    /* ============================================================
+       1b · CHI SIAMO — presentazione (layout editoriale a immagini)
+       ============================================================ */
+    .chi{background:var(--sand-light);overflow:hidden;padding-block:clamp(6rem,8vw,9rem)}
+    .chi__grid{
+      display:grid;
+      grid-template-columns:minmax(70px,.8fr) minmax(280px,1.55fr) minmax(220px,1.3fr) minmax(110px,.85fr);
+      grid-template-rows:clamp(440px,46vw,600px);
+      gap:clamp(.9rem,1.5vw,1.5rem);
+    }
+    .chi__img{position:relative;overflow:hidden;background:#241812;height:100%}
+    .chi__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+    .chi__img:hover img{transform:scale(1.03)}
+    .chi__img--left{align-self:start;height:72%}
+    .chi__right{display:grid;grid-template-rows:1fr 1fr;gap:clamp(.9rem,1.5vw,1.5rem);height:100%}
+    .chi__text{display:flex;flex-direction:column;justify-content:center;padding-inline:clamp(.5rem,1.4vw,1.4rem)}
+    .chi__title{font-size:clamp(1.9rem,3.6vw,3.4rem);color:var(--amber);line-height:1.02}
+    .chi__sub{color:var(--burnt);margin:1.3rem 0 1rem}
+    .chi__body{max-width:44ch;font-size:.95rem;color:#3a2a1b;line-height:1.65;margin-bottom:1.6rem}
+    .chi__text .btn{align-self:flex-start}
+    /* Chi Siamo: immagini laterali sfalsate verso l'alto (disposizione volutamente irregolare) */
+    .chi .chi__img--left{transform:translateY(-24px)}
+    .chi .chi__right{transform:translateY(-90px)}
+    .chi .chi__right figure:last-child{transform:translateY(34px)}
+    @media (max-width:900px){
+      .chi{padding-inline:var(--pad)}
+      .chi__grid{grid-template-columns:1fr 1fr;grid-template-rows:none;gap:.7rem}
+      .chi__text{grid-column:1/-1;order:-1;padding:1.25rem 0}
+      .chi__img--left{height:240px;align-self:stretch}
+      .chi__img--center{height:240px}
+      .chi__right{grid-column:1/-1;grid-template-rows:none;grid-template-columns:1fr 1fr;height:200px}
+      .chi .chi__img--left,.chi .chi__right,.chi .chi__right figure:last-child{transform:none}
+    }
+    @media (max-width:560px){
+      .chi__grid{grid-template-columns:1fr}
+      .chi__img--left,.chi__img--center{height:220px}
+      .chi__right{grid-template-columns:1fr 1fr;height:150px}
+    }
+
+    /* ============================================================
+       1c · SERVIZI — card con immagine di sfondo
+       ============================================================ */
+    .svc{background:var(--white);padding-block:clamp(3.5rem,6vw,6.5rem)}
+    .svc__inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+    .svc__head{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:end;margin-bottom:clamp(2rem,4vw,3.2rem)}
+    .svc__title{font-size:clamp(2rem,4.5vw,4rem);color:var(--amber)}
+    .svc__intro{max-width:48ch;margin-left:auto;text-align:right;color:#3a2a1b;font-size:1rem;line-height:1.65}
+    .svc__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,1.6vw,1.5rem)}
+    .scard{
+      position:relative;overflow:hidden;isolation:isolate;
+      min-height:clamp(420px,44vw,580px);
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:clamp(1.4rem,2vw,2rem);color:#fff;background:#1a1109;
+    }
+    .scard__img{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .8s ease}
+    .scard::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,5,3,.92),rgba(8,5,3,.35) 45%,rgba(8,5,3,.05) 78%)}
+    .scard:hover .scard__img{transform:scale(1.06)}
+    .scard__arrow{
+      position:absolute;top:clamp(1rem,1.4vw,1.3rem);right:clamp(1rem,1.4vw,1.3rem);z-index:3;
+      width:46px;height:46px;border-radius:50%;background:var(--white);color:var(--dark);
+      display:grid;place-items:center;
+      transition:background .25s ease,color .25s ease,transform .25s ease;
+    }
+    .scard__arrow:hover{background:var(--burnt);color:var(--white);transform:translateX(3px)}
+    .scard__body{position:relative;z-index:2}
+    .scard__eyebrow{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:.62rem;color:rgba(255,255,255,.82);margin-bottom:.5rem}
+    .scard__title{font-size:clamp(1.5rem,2.2vw,2.1rem);line-height:1.03;color:#fff}
+    .scard__desc{
+      margin-top:.8rem;
+      color:rgba(255,255,255,.9);font-size:.9rem;line-height:1.5;
+    }
+    @media (max-width:980px){.svc__grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:820px){.svc__head{grid-template-columns:1fr}}
+    @media (max-width:640px){.svc__grid{grid-template-columns:1fr}}
+
+    /* ============================================================
+       2 · CHI SIAMO + STATS
+       ============================================================ */
+    .about{background:var(--white)}
+    .about__grid{
+      max-width:var(--maxw);margin:0 auto;
+      display:grid;grid-template-columns:1.05fr 1fr;
+    }
+    .about__left{padding:clamp(3rem,6vw,6rem) var(--pad);border-right:1px solid var(--line)}
+    .about__title{font-size:clamp(2.6rem,6vw,5.5rem);color:var(--dark);display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+    .about__title small{font-family:var(--font-display);font-weight:400;font-size:.32em;letter-spacing:.02em;color:var(--burnt)}
+    .about__body{max-width:40ch;margin-top:1.8rem;font-size:1rem;color:#3a2a1b;line-height:1.65}
+    .about__img{
+      margin-top:2.5rem;height:clamp(220px,26vw,300px);
+      position:relative;overflow:hidden;
+    }
+    .about__img img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .stats{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr}
+    .stat{
+      padding:clamp(1.6rem,2.5vw,2.4rem);
+      border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+      display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;min-height:170px;
+    }
+    .stat:nth-child(2n){border-right:0}
+    .stat__label{font-size:.85rem;color:#3a2a1b;max-width:22ch;line-height:1.45}
+    .stat__num{font-family:var(--font-display);font-weight:700;font-size:clamp(2.6rem,4.5vw,4rem);line-height:.85;color:var(--dark);letter-spacing:-.03em}
+    .stat--dark{background:var(--dark);color:var(--sand);flex-direction:column;justify-content:space-between}
+    .stat--dark p{font-size:1.05rem;line-height:1.4;max-width:26ch;color:var(--sand)}
+    .stat--dark .btn{align-self:flex-start;border-color:var(--sand);color:var(--sand)}
+    .stat--dark .btn:hover{background:var(--burnt);border-color:var(--burnt);color:var(--white)}
+
+    /* ============================================================
+       3 · MARQUEE
+       ============================================================ */
+    .marquee{background:var(--burnt);color:var(--white);overflow:hidden;padding:.85rem 0;border-block:1px solid rgba(0,0,0,.12)}
+    .marquee__track{display:inline-flex;white-space:nowrap;will-change:transform;animation:scroll 32s linear infinite}
+    .marquee__track span{
+      font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+      letter-spacing:.22em;font-size:.72rem;padding:0 1.4rem;display:inline-flex;align-items:center;
+    }
+    .marquee__track .sep{opacity:.55}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+
+    /* ============================================================
+       4 · SERVIZI (feature editoriale)
+       ============================================================ */
+    .services{background:var(--sand-light);position:relative;overflow:hidden;padding:clamp(3.5rem,7vw,7rem) 0}
+    .services__inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+    .services__head{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:end}
+    .services__title{font-size:clamp(2.4rem,6vw,5.2rem);color:var(--amber)}
+    .services__sub{color:var(--burnt);margin:1.4rem 0 1rem}
+    .services__lead{max-width:42ch;font-size:.98rem;color:#3a2a1b;line-height:1.65}
+    .services__media{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.8rem}
+    .services__media .img-ph{height:clamp(200px,24vw,340px)}
+    .img-ph{position:relative;overflow:hidden;background:#241812}
+    .img-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+    .img-ph:hover img{transform:scale(1.03)}
+
+    /* Badge circolare rotante */
+    .badge{
+      position:absolute;top:clamp(1.5rem,4vw,3rem);right:var(--pad);
+      width:118px;height:118px;animation:spin 18s linear infinite;
+    }
+    .badge svg{width:100%;height:100%}
+    .badge text{font-family:var(--font-display);font-weight:700;font-size:9.5px;letter-spacing:2.5px;fill:var(--burnt);text-transform:uppercase}
+    .badge__core{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;color:var(--burnt);font-size:1.5rem}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Righe servizio */
+    .service-rows{max-width:var(--maxw);margin:clamp(2.5rem,5vw,4rem) auto 0;padding:0 var(--pad)}
+    .srow{
+      display:grid;grid-template-columns:auto 1fr auto;gap:clamp(1rem,3vw,3rem);align-items:center;
+      padding:2rem 0;border-top:1px solid var(--line);transition:padding-left .3s ease;
+    }
+    .service-rows .srow:last-child{border-bottom:1px solid var(--line)}
+    .srow:hover{padding-left:1rem}
+    .srow__num{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--burnt)}
+    .srow__title{font-family:var(--font-display);font-weight:700;text-transform:lowercase;font-size:clamp(1.4rem,3vw,2.4rem);line-height:1;letter-spacing:-.02em}
+    .srow__desc{max-width:52ch;font-size:.92rem;color:#3a2a1b;margin-top:.6rem}
+    .srow__tag{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:.6rem;color:var(--burnt);border:1px solid var(--burnt);padding:.4rem .8rem;border-radius:999px;white-space:nowrap}
+
+    /* ============================================================
+       5 · RIPROVA SOCIALE (testimonial dark)
+       ============================================================ */
+    .proof{
+      position:relative;color:var(--white);
+      padding:clamp(4rem,10vw,9rem) var(--pad);
+      background:linear-gradient(120deg,rgba(20,12,7,.88),rgba(10,6,4,.9) 55%,rgba(35,22,13,.84)),
+        url("https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+      overflow:hidden;
+    }
+    .proof::before{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(80% 90% at 75% 30%,rgba(210,78,1,.22),transparent 60%);
+    }
+    .proof__inner{position:relative;max-width:var(--maxw);margin:0 auto;z-index:2}
+    .proof__mark{font-family:var(--font-display);font-weight:700;font-size:6rem;line-height:.6;color:var(--amber);opacity:.9}
+    .proof__eyebrow{color:var(--amber);margin:.5rem 0 1.4rem}
+    .proof__quote{font-family:var(--font-display);font-weight:700;text-transform:lowercase;font-size:clamp(1.8rem,4.5vw,4rem);line-height:1.02;letter-spacing:-.02em;max-width:20ch}
+    .proof__body{max-width:48ch;margin:1.8rem 0 1.5rem;color:rgba(249,221,177,.85);font-size:1rem;line-height:1.6}
+    .proof__author{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--white)}
+    .proof__author span{color:var(--amber)}
+    .proof__cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:3rem}
+    .tcard{border:1px solid rgba(249,221,177,.22);padding:1.6rem;border-radius:4px}
+    .tcard p{font-size:.95rem;color:rgba(249,221,177,.9);line-height:1.55}
+    .tcard cite{display:block;margin-top:1rem;font-style:normal;font-family:var(--font-display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;color:var(--amber)}
+
+    /* ============================================================
+       6 · CTA FINALE
+       ============================================================ */
+    .cta{background:var(--sand);text-align:center;padding:clamp(3rem,6vw,5.5rem) var(--pad)}
+    .cta__eyebrow{color:var(--burnt);margin-bottom:1rem}
+    .cta__title{font-size:clamp(2rem,5vw,4.2rem);color:var(--amber)}
+    .cta__sub{max-width:44ch;margin:1.1rem auto 1.8rem;color:#3a2a1b;font-size:1rem;line-height:1.6}
+
+    /* ============================================================
+       GALLERY (prima del footer)
+       ============================================================ */
+    .gallery{background:var(--white);padding-block:clamp(3.5rem,6vw,6rem)}
+    .gallery__inner{max-width:none;margin:0;padding:0}
+    .gallery__head{max-width:var(--maxw);margin:0 auto clamp(1.5rem,3vw,2.4rem);padding-inline:var(--pad)}
+    .gallery__head .eyebrow{display:block;color:var(--burnt);margin-bottom:.7rem}
+    .gallery__title{font-size:clamp(1.8rem,4vw,3.4rem);color:var(--amber)}
+    .gallery__grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(120px,13vw,175px);gap:clamp(.5rem,1vw,.9rem)}
+    .gallery__item{position:relative;overflow:hidden;background:#241812}
+    .gallery__item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+    .gallery__item:hover img{transform:scale(1.05)}
+    .gallery__item:nth-child(1){grid-column:span 4;grid-row:span 2}
+    .gallery__item:nth-child(2){grid-column:span 2}
+    .gallery__item:nth-child(3){grid-column:span 2}
+    .gallery__item:nth-child(4){grid-column:span 2;grid-row:span 2}
+    .gallery__item:nth-child(5){grid-column:span 2;grid-row:span 2}
+    .gallery__item:nth-child(6){grid-column:span 2;grid-row:span 2}
+    @media (max-width:820px){
+      .gallery__grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(130px,34vw,190px)}
+      .gallery__item:nth-child(1),.gallery__item:nth-child(2),.gallery__item:nth-child(3),
+      .gallery__item:nth-child(4),.gallery__item:nth-child(5),.gallery__item:nth-child(6){grid-column:span 1;grid-row:span 1}
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer{background:#5E1917;color:var(--sand);padding:clamp(3rem,6vw,5rem) 0 2rem}
+    .footer__inner{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad);display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
+    .footer__logo{line-height:0}
+    .footer__logo .logo-svg{height:60px}
+    .footer__tag{max-width:34ch;margin-top:1.2rem;color:rgba(249,221,177,.75);font-size:.92rem;line-height:1.55}
+    .footer h4{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:.62rem;color:var(--amber);margin-bottom:1.1rem}
+    .footer ul{list-style:none;display:grid;gap:.7rem}
+    .footer ul a{font-size:.92rem;color:rgba(249,221,177,.85)}
+    .footer ul a:hover{color:var(--white)}
+    .footer__bottom{max-width:var(--maxw);margin:3rem auto 0;padding:1.5rem var(--pad) 0;border-top:1px solid rgba(249,221,177,.18);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;font-size:.78rem;color:rgba(249,221,177,.6)}
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width:900px){
+      .nav__links{display:none}
+      .nav__burger{display:flex}
+      .about__grid{grid-template-columns:1fr}
+      .about__left{border-right:0;border-bottom:1px solid var(--line)}
+      .services__head{grid-template-columns:1fr}
+      .services__media{grid-template-columns:1fr}
+      .srow{grid-template-columns:auto 1fr;gap:1rem}
+      .srow__tag{grid-column:2;justify-self:start;margin-top:.4rem}
+      .proof__cards{grid-template-columns:1fr}
+      .footer__inner{grid-template-columns:1fr 1fr}
+      .badge{width:92px;height:92px}
+    }
+    @media (max-width:560px){
+      .stats{grid-template-columns:1fr}
+      .stat{border-right:0!important}
+      .footer__inner{grid-template-columns:1fr}
+      .hero__row{align-items:flex-start}
+    }
+
+    /* Rispetto prefers-reduced-motion */
+    @media (prefers-reduced-motion:reduce){
+      .marquee__track,.badge{animation:none}
+      *{transition:none!important}
+      html{scroll-behavior:auto}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Salta al contenuto principale</a>
+
+  <!-- ===================== NAV ===================== -->
+  <header>
+    <nav class="nav" id="nav" aria-label="Navigazione principale">
+      <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="TWA Consulting — Home">
+        <svg class="logo-svg" viewBox="0 0 155 102" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24.3772 77.1082C20.6861 77.1082 17.3402 76.52 14.3661 75.3704C11.3654 74.194 8.78962 72.5096 6.66524 70.237C4.54086 67.9911 2.89447 65.2372 1.72606 62.0021C0.557649 58.767 0 55.0506 0 50.8262V0H13.0118V21.817H24.3772L27.0858 33.6613L13.118 33.8218V51.6016C13.118 55.318 14.0475 58.4996 15.9328 61.1465C17.8182 63.7934 20.633 65.1303 24.3772 65.1303V77.135V77.1082Z" fill="#5E1917"/>
+          <path d="M25.5723 21.817H39.1152L48.2235 61.3069L57.3317 21.817H71.6182L80.7265 61.3069L89.8347 21.817H102.289L89.7285 76.3596H70.6622L63.9439 47.2435L57.2255 76.3596H38.1592L25.5988 21.817H25.5723Z" fill="#5E1917"/>
+          <path d="M153.619 37.2975C153.38 36.5222 153.088 35.7735 152.769 35.0784C151.282 31.8433 149.291 29.1963 146.821 27.1109C144.325 25.0254 141.51 23.5014 138.377 22.5389C137.607 22.2983 136.836 22.0844 136.04 21.924C136.04 21.924 136.013 21.924 135.987 21.924C133.597 21.3625 131.101 21.0952 128.551 21.0952C126.002 21.0952 121.514 21.6834 118.036 22.8865C115.035 23.9292 112.353 25.373 109.91 27.2446C109.538 27.5387 109.14 27.8328 108.795 28.1536C106.086 30.4797 103.882 33.394 102.183 36.9232C100.483 40.4524 99.6333 44.5164 99.6333 49.0883C99.6333 53.6603 99.6333 49.5429 99.6333 49.7568C99.6333 49.9172 99.6333 50.0776 99.6333 50.238C99.6333 50.3717 99.6333 50.5321 99.6333 50.6658C99.6333 50.9064 99.6599 51.1471 99.6864 51.3609C99.8988 54.1416 100.43 56.8419 101.333 59.4354C102.501 62.7775 104.227 65.7452 106.538 68.3654C108.848 70.9856 111.769 73.0978 115.301 74.702C115.327 74.702 115.38 74.7287 115.433 74.7554C118.939 76.3329 123.028 77.1083 127.649 77.1083C132.269 77.1083 132.588 76.8409 135.084 76.3062C137.58 75.7714 139.864 74.8089 141.962 73.4186V76.4666H154.973V46.682C154.973 43.1528 154.522 40.0246 153.619 37.2708V37.2975ZM127.914 65.8254C118.992 65.8254 111.742 58.5263 111.742 49.5429C111.742 40.5594 118.992 33.2603 127.914 33.2603C136.836 33.2603 128.047 33.2603 128.127 33.2603C128.153 33.2603 128.18 33.2603 128.233 33.2603C128.286 33.2603 128.312 33.2603 128.339 33.2603C130.171 33.2603 131.95 33.6079 133.65 34.303C133.73 34.3298 133.783 34.3565 133.862 34.3832C134.022 34.4367 134.181 34.5169 134.34 34.5971C140.076 37.1104 144.086 42.8587 144.086 49.5429C144.086 56.227 136.836 65.8254 127.914 65.8254Z" fill="#5E1917"/>
+          <path d="M112.539 5.72162V18.6889H121.037V64.3014C123.134 65.2907 125.445 65.8254 127.914 65.8254C130.384 65.8254 133.039 65.1837 135.217 64.0608V5.72162H112.539Z" fill="#D24E01"/>
+          <path d="M7.64766 95.3159C8.55052 95.3159 9.37371 95.102 10.1172 94.6742C10.8608 94.2464 11.4715 93.6582 11.9495 92.9363L13.5428 93.9791C13.2507 94.4603 12.8789 94.9148 12.4541 95.3159C12.0292 95.7169 11.5512 96.0378 11.0467 96.3319C10.5421 96.626 10.011 96.8399 9.42682 96.9736C8.84262 97.134 8.25842 97.1874 7.64766 97.1874C6.66513 97.1874 5.76227 97.0003 4.91252 96.626C4.06277 96.2517 3.31924 95.7704 2.68192 95.1287C2.04461 94.4871 1.54007 93.7652 1.19486 92.9096C0.82309 92.054 0.637207 91.1717 0.637207 90.2092C0.637207 89.2467 0.82309 88.3109 1.19486 87.4553C1.56662 86.5998 2.07116 85.8511 2.68192 85.2362C3.31924 84.5945 4.06277 84.1133 4.91252 83.739C5.76227 83.3646 6.66513 83.1775 7.64766 83.1775C8.63018 83.1775 8.84262 83.2577 9.42682 83.3914C10.011 83.5518 10.5421 83.7657 11.0467 84.0331C11.5512 84.3004 12.0026 84.648 12.4275 85.049C12.8524 85.4501 13.1976 85.8779 13.4897 86.3859L11.8964 87.4286C11.445 86.7067 10.8342 86.1185 10.0907 85.6907C9.32061 85.2629 8.49741 85.049 7.6211 85.049C6.7448 85.049 6.26681 85.1827 5.6295 85.4501C5.01874 85.7175 4.46109 86.0918 4.00966 86.5463C3.55823 87.0008 3.18646 87.5623 2.92091 88.1772C2.65537 88.7922 2.52259 89.4873 2.52259 90.2092C2.52259 90.9311 2.65537 91.5728 2.92091 92.1877C3.18646 92.8026 3.55823 93.3374 4.00966 93.8186C4.46109 94.2732 5.01874 94.6475 5.6295 94.9148C6.24026 95.1822 6.90413 95.3159 7.59455 95.3159H7.64766Z" fill="#5E1917"/>
+          <path d="M18.2695 90.2092C18.2695 89.2467 18.4554 88.3376 18.8272 87.4821C19.1989 86.6265 19.6769 85.8779 20.3142 85.2362C20.9516 84.5945 21.6685 84.1133 22.5448 83.739C23.4211 83.3646 24.2975 83.1775 25.28 83.1775C26.2625 83.1775 27.1654 83.3646 28.0151 83.739C28.8649 84.1133 29.6084 84.5945 30.2457 85.2362C30.883 85.8779 31.361 86.5998 31.7328 87.4821C32.1045 88.3376 32.2904 89.2467 32.2904 90.2092C32.2904 91.1717 32.1045 92.054 31.7328 92.9096C31.361 93.7652 30.883 94.5138 30.2457 95.1287C29.6084 95.7704 28.8914 96.2517 28.0151 96.626C27.1654 97.0003 26.2625 97.1874 25.28 97.1874C24.2975 97.1874 23.3946 97.0003 22.5448 96.626C21.6951 96.2517 20.9516 95.7704 20.3142 95.1287C19.6769 94.4871 19.1989 93.7652 18.8272 92.9096C18.4554 92.054 18.2695 91.1717 18.2695 90.2092ZM20.1815 90.2092C20.1815 90.9044 20.3142 91.5728 20.5798 92.1877C20.8453 92.8026 21.2171 93.3374 21.6685 93.8186C22.12 94.2732 22.6776 94.6475 23.2884 94.9148C23.8991 95.1822 24.563 95.3159 25.28 95.3159C25.997 95.3159 26.6343 95.1822 27.245 94.9148C27.8558 94.6475 28.3869 94.2732 28.8649 93.8186C29.3429 93.3641 29.6881 92.8026 29.9536 92.1877C30.2192 91.5728 30.3519 90.9044 30.3519 90.2092C30.3519 89.5141 30.2192 88.8189 29.9536 88.1772C29.6881 87.5623 29.3163 87.0008 28.8649 86.5463C28.4134 86.0918 27.8558 85.7175 27.245 85.4501C26.6343 85.1827 25.9704 85.049 25.28 85.049C24.5896 85.049 23.9257 85.1827 23.2884 85.4501C22.6776 85.7175 22.12 86.0918 21.6685 86.5463C21.2171 87.0008 20.8453 87.5623 20.5798 88.1772C20.3142 88.7922 20.1815 89.4873 20.1815 90.2092Z" fill="#5E1917"/>
+          <path d="M37.9733 83.4716H40.018L47.1613 93.7652V83.4716H49.0732V96.8934H47.0551L39.8587 86.4394V96.8934H37.9468V83.4716H37.9733Z" fill="#5E1917"/>
+          <path d="M62.8019 86.2255C62.6691 86.065 62.4832 85.9313 62.2973 85.7709C62.0849 85.6105 61.8459 85.4768 61.5804 85.3699C61.3148 85.2629 61.0227 85.156 60.704 85.1025C60.3854 85.0223 60.0667 84.9956 59.7481 84.9956C58.978 84.9956 58.3938 85.156 57.9689 85.4768C57.544 85.7977 57.3316 86.2522 57.3316 86.8137C57.3316 87.3751 57.3847 87.3751 57.5175 87.589C57.6503 87.8029 57.8096 87.9901 58.022 88.1772C58.2345 88.3376 58.5 88.4981 58.7656 88.605C59.0577 88.7387 59.3498 88.8456 59.6684 88.9526C60.173 89.1397 60.7306 89.3002 61.2883 89.514C61.8725 89.7012 62.377 89.9418 62.8815 90.2359C63.3595 90.53 63.7578 90.9044 64.0765 91.3589C64.3952 91.8134 64.5545 92.4283 64.5545 93.1502C64.5545 93.8721 64.4483 94.2999 64.2093 94.7812C63.9703 95.2624 63.6516 95.6635 63.2267 96.011C62.8019 96.3586 62.2973 96.5992 61.7131 96.7864C61.1289 96.9736 60.4916 97.0538 59.7746 97.0538C59.0577 97.0538 58.6328 97.0003 58.1017 96.8933C57.5706 96.7864 57.0926 96.626 56.6677 96.4388C56.2428 96.2517 55.8711 96.0645 55.5524 95.8506C55.2338 95.6367 54.9948 95.4496 54.8354 95.2624L56.0039 93.8454C56.1366 93.9791 56.296 94.1127 56.535 94.2732C56.7739 94.4336 57.0395 94.5673 57.3847 94.7277C57.7299 94.8881 58.0751 94.995 58.4734 95.102C58.8718 95.2089 59.3232 95.2624 59.7746 95.2624C60.6244 95.2624 61.3148 95.0753 61.8193 94.7277C62.3239 94.3801 62.5894 93.8988 62.5894 93.2839C62.5894 92.669 62.5098 92.6422 62.3504 92.4283C62.1911 92.1877 61.9787 91.9738 61.7131 91.8134C61.4476 91.6262 61.1289 91.4926 60.7837 91.3321C60.4385 91.1985 60.0667 91.0648 59.6684 90.9578C59.1639 90.7974 58.6593 90.6102 58.1548 90.4498C57.6503 90.2627 57.1723 90.022 56.7474 89.7279C56.3225 89.4338 55.9773 89.0595 55.7118 88.6317C55.4462 88.1772 55.3134 87.6425 55.3134 87.0008C55.3134 86.3591 55.4197 85.8779 55.6321 85.4234C55.8445 84.9421 56.1366 84.5678 56.535 84.2202C56.9333 83.8726 57.3847 83.632 57.9424 83.4716C58.5 83.2844 59.0842 83.2042 59.7481 83.2042C60.4119 83.2042 61.5007 83.3646 62.2708 83.6587C63.0409 83.9528 63.5985 84.3539 63.9968 84.8351L62.7753 86.2522L62.8019 86.2255Z" fill="#5E1917"/>
+          <path d="M70.1044 83.4716H72.0163V91.4391C72.0163 92.0273 72.1225 92.562 72.3084 93.0433C72.4943 93.5246 72.7599 93.9256 73.0785 94.2465C73.3972 94.5673 73.822 94.8347 74.2735 95.0218C74.7515 95.209 75.256 95.2892 75.8402 95.2892C76.4244 95.2892 76.9289 95.209 77.3804 95.0218C77.8584 94.8347 78.2567 94.5673 78.5753 94.2465C78.9206 93.9256 79.1861 93.4978 79.3454 93.0433C79.5313 92.562 79.611 92.0273 79.611 91.4391V83.4716H81.5229V91.4659C81.5229 92.3749 81.3636 93.177 81.0715 93.8721C80.7794 94.5673 80.3545 95.1822 79.8234 95.6635C79.2923 96.1447 78.7081 96.5191 78.0177 96.7864C77.3273 97.0538 76.5837 97.1875 75.8137 97.1875C75.0436 97.1875 74.3 97.0538 73.5831 96.7864C72.8926 96.5191 72.2819 96.1447 71.7508 95.6635C71.2197 95.1822 70.8214 94.5673 70.5027 93.8721C70.2106 93.177 70.0513 92.3749 70.0513 91.4659V83.4716H70.1044Z" fill="#5E1917"/>
+          <path d="M97.1903 96.8934H88.082V83.4716H89.994V95.0753H97.2169V96.8934H97.1903Z" fill="#5E1917"/>
+          <path d="M109.724 85.2897H105.502V96.8934H103.59V85.2897H99.3413V83.4716H109.724V85.2897Z" fill="#5E1917"/>
+          <path d="M117.213 96.8934H115.301V83.4716H117.213V96.8934Z" fill="#5E1917"/>
+          <path d="M123.745 83.4716H125.79L132.933 93.7652V83.4716H134.845V96.8934H132.827L125.63 86.4394V96.8934H123.718V83.4716H123.745Z" fill="#5E1917"/>
+          <path d="M154.336 90.7707C154.309 91.7332 154.123 92.5888 153.831 93.3641C153.513 94.1395 153.061 94.8079 152.477 95.3961C151.893 95.9576 151.202 96.4121 150.379 96.7062C149.556 97.027 148.627 97.1874 147.591 97.1874C146.555 97.1874 145.706 97.0003 144.856 96.626C144.006 96.2517 143.263 95.7704 142.625 95.1287C141.988 94.4871 141.51 93.7652 141.138 92.9096C140.766 92.054 140.581 91.1717 140.581 90.2092C140.581 89.2467 140.766 88.3109 141.138 87.4553C141.51 86.5998 141.988 85.8511 142.625 85.2362C143.263 84.5945 144.006 84.1133 144.856 83.739C145.706 83.3646 146.635 83.1775 147.591 83.1775C148.547 83.1775 148.786 83.2577 149.37 83.4181C149.954 83.5785 150.485 83.7924 150.99 84.0598C151.495 84.3272 151.946 84.6747 152.371 85.0758C152.796 85.4768 153.141 85.9314 153.433 86.4126L151.84 87.4286C151.388 86.7067 150.804 86.1185 150.034 85.6907C149.291 85.2629 148.441 85.049 147.538 85.049C146.635 85.049 146.184 85.1827 145.546 85.4501C144.936 85.7175 144.378 86.0918 143.926 86.5463C143.475 87.0008 143.103 87.5623 142.838 88.1772C142.572 88.7922 142.439 89.4873 142.439 90.2092C142.439 90.9311 142.572 91.5728 142.838 92.1877C143.103 92.8026 143.475 93.3374 143.926 93.8186C144.378 94.2732 144.936 94.6475 145.546 94.9148C146.157 95.1822 146.821 95.3159 147.511 95.3159C148.786 95.3159 149.822 95.0218 150.671 94.4336C151.521 93.8454 152.026 92.9898 152.212 91.8134H147.538V90.0755H154.283V90.7707H154.336Z" fill="#5E1917"/>
+        </svg>
+      </a>
+      <div class="nav__links">
+        <a href="#servizi">Servizi</a>
+        <a href="#chi-siamo">Chi Siamo</a>
+        <a href="#contatti">Contatti</a>
+        <span class="nav__version" role="group" aria-label="Cambia versione della home">
+          <span class="is-current" aria-current="true">V1</span>
+          <a href="versione2/index.html">V2</a>
+        </span>
+      </div>
+      <button class="nav__burger" aria-label="Apri menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== 1 · HERO ===================== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__inner">
+        <h1 class="display hero__title" id="hero-heading">La location<br>perfetta.</h1>
+        <div class="hero__row">
+          <p class="hero__lead">Consulenza esclusiva per hotel e ristoranti di lusso a Milano e nel Nord Italia. Il network, il territorio, l'esperienza diretta di chi l'ha già fatto.</p>
+          <div class="hero__actions">
+            <a href="#servizi" class="btn btn--amber">Scopri i servizi</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero__media" role="img" aria-label="Sala di un ristorante di lusso con tavolo allestito e vista sul porto, progetto seguito da TWA Consulting"></div>
+    </section>
+
+    <!-- ===================== 1b · CHI SIAMO — presentazione ===================== -->
+    <section class="chi" id="chi-siamo" aria-labelledby="chi-heading">
+      <div class="chi__grid">
+        <figure class="chi__img chi__img--left">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=700&q=80" alt="Atmosfera di un cocktail bar di lusso" loading="lazy">
+        </figure>
+
+        <div class="chi__text">
+          <h2 class="display chi__title" id="chi-heading">Un'esperienza unica, nata dal campo.</h2>
+          <p class="eyebrow chi__sub">Art Director · Ristoratore Michelin · M&amp;A Hospitality</p>
+          <p class="chi__body">Filippo Mori non è un consulente da ufficio. Ha vissuto il mondo dell'hospitality dall'interno — come Art Director internazionale, come ristoratore premiato dalla Guida Michelin, come manager di acquisizioni da centinaia di milioni di euro. Oggi mette tutto questo al servizio di chi vuole aprire a Milano e nel Nord Italia.</p>
+          <a href="#contatti" class="btn btn--bordeaux">Leggi la storia completa</a>
+        </div>
+
+        <figure class="chi__img chi__img--center">
+          <img src="img/Filippo%20Mori%20.png" alt="Filippo Mori, fondatore di TWA Consulting" loading="lazy">
+        </figure>
+
+        <div class="chi__right">
+          <figure class="chi__img">
+            <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=700&q=80" alt="Tavola di alta ristorazione" loading="lazy">
+          </figure>
+          <figure class="chi__img">
+            <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=700&q=80" alt="Architettura contemporanea di pregio" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 1c · SERVIZI (card) ===================== -->
+    <section class="svc" id="servizi" aria-labelledby="svc-heading">
+      <div class="svc__inner">
+        <div class="svc__head">
+          <h2 class="display svc__title" id="svc-heading">Consulenza su misura<br>per l'eccellenza</h2>
+          <p class="svc__intro">Ogni progetto è unico. Lavoriamo a fianco del cliente in ogni fase — dalla ricerca della location al posizionamento strategico — fondendo interior design, branding e creatività al servizio di chi vuole aprire a Milano e nel Nord Italia.</p>
+        </div>
+
+        <div class="svc__grid">
+          <article class="scard">
+            <span class="scard__img" style="background-image:url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80')"></span>
+            <a class="scard__arrow" href="#contatti" aria-label="Scopri il servizio Hotel di lusso">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+            </a>
+            <div class="scard__body">
+              <h3 class="display scard__title">Hotel di lusso</h3>
+              <p class="scard__desc">Le strutture di maggior valore nelle location più strategiche del Nord Italia: due diligence immobiliare, posizionamento del brand luxury e business plan.</p>
+            </div>
+          </article>
+
+          <article class="scard">
+            <span class="scard__img" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80')"></span>
+            <a class="scard__arrow" href="#contatti" aria-label="Scopri il servizio Ristorante di lusso">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+            </a>
+            <div class="scard__body">
+              <h3 class="display scard__title">Ristorante di lusso</h3>
+              <p class="scard__desc">L'esperienza di chi ha gestito un locale della Guida Michelin: concept gastronomico, scelta dello spazio e posizionamento nel mercato milanese e del Nord Italia.</p>
+            </div>
+          </article>
+
+          <article class="scard">
+            <span class="scard__img" style="background-image:url('https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?auto=format&fit=crop&w=800&q=80')"></span>
+            <a class="scard__arrow" href="#contatti" aria-label="Scopri il servizio Interior Design e Concept">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg>
+            </a>
+            <div class="scard__body">
+              <h3 class="display scard__title">Interior design &amp; concept</h3>
+              <p class="scard__desc">Architettura e art direction internazionale: ogni spazio è progettato per comunicare un'identità precisa e creare un'esperienza memorabile.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<!-- (Sezione Servizi spostata sotto "Un'esperienza unica" come card — vedi #servizi) -->
+
+    <!-- ===================== 6 · CTA FINALE ===================== -->
+    <section class="cta" id="contatti" aria-labelledby="cta-heading">
+      <p class="eyebrow cta__eyebrow">Hai un progetto in mente?</p>
+      <h2 class="display cta__title" id="cta-heading">Consulenza esclusiva.</h2>
+      <p class="cta__sub">Un incontro riservato con Filippo Mori per valutare le opportunità disponibili e costruire la strategia giusta per il tuo progetto.</p>
+      <a href="mailto:info@twaconsulting.it" class="btn btn--amber">Contattaci ora</a>
+    </section>
+
+    <!-- ===================== GALLERY ===================== -->
+    <section class="gallery" id="gallery" aria-labelledby="gallery-heading">
+      <div class="gallery__inner">
+        <div class="gallery__head">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="display gallery__title" id="gallery-heading">Progetti e atmosfere</h2>
+        </div>
+        <div class="gallery__grid">
+          <figure class="gallery__item">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Sala di un ristorante di lusso dal design ricercato" loading="lazy">
+          </figure>
+          <figure class="gallery__item">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80" alt="Resort di lusso al tramonto" loading="lazy">
+          </figure>
+          <figure class="gallery__item">
+            <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=800&q=80" alt="Dettaglio still-life di interni raffinati" loading="lazy">
+          </figure>
+          <figure class="gallery__item">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Struttura ricettiva fronte mare" loading="lazy">
+          </figure>
+          <figure class="gallery__item">
+            <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80" alt="Location panoramica per hotel nel Nord Italia" loading="lazy">
+          </figure>
+          <figure class="gallery__item">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Interni contemporanei di pregio" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="portfolio">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__logo">
+          <svg class="logo-svg logo-svg--light" viewBox="0 0 155 102" role="img" aria-label="TWA Consulting" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24.3772 77.1082C20.6861 77.1082 17.3402 76.52 14.3661 75.3704C11.3654 74.194 8.78962 72.5096 6.66524 70.237C4.54086 67.9911 2.89447 65.2372 1.72606 62.0021C0.557649 58.767 0 55.0506 0 50.8262V0H13.0118V21.817H24.3772L27.0858 33.6613L13.118 33.8218V51.6016C13.118 55.318 14.0475 58.4996 15.9328 61.1465C17.8182 63.7934 20.633 65.1303 24.3772 65.1303V77.135V77.1082Z" fill="#5E1917"/>
+            <path d="M25.5723 21.817H39.1152L48.2235 61.3069L57.3317 21.817H71.6182L80.7265 61.3069L89.8347 21.817H102.289L89.7285 76.3596H70.6622L63.9439 47.2435L57.2255 76.3596H38.1592L25.5988 21.817H25.5723Z" fill="#5E1917"/>
+            <path d="M153.619 37.2975C153.38 36.5222 153.088 35.7735 152.769 35.0784C151.282 31.8433 149.291 29.1963 146.821 27.1109C144.325 25.0254 141.51 23.5014 138.377 22.5389C137.607 22.2983 136.836 22.0844 136.04 21.924C136.04 21.924 136.013 21.924 135.987 21.924C133.597 21.3625 131.101 21.0952 128.551 21.0952C126.002 21.0952 121.514 21.6834 118.036 22.8865C115.035 23.9292 112.353 25.373 109.91 27.2446C109.538 27.5387 109.14 27.8328 108.795 28.1536C106.086 30.4797 103.882 33.394 102.183 36.9232C100.483 40.4524 99.6333 44.5164 99.6333 49.0883C99.6333 53.6603 99.6333 49.5429 99.6333 49.7568C99.6333 49.9172 99.6333 50.0776 99.6333 50.238C99.6333 50.3717 99.6333 50.5321 99.6333 50.6658C99.6333 50.9064 99.6599 51.1471 99.6864 51.3609C99.8988 54.1416 100.43 56.8419 101.333 59.4354C102.501 62.7775 104.227 65.7452 106.538 68.3654C108.848 70.9856 111.769 73.0978 115.301 74.702C115.327 74.702 115.38 74.7287 115.433 74.7554C118.939 76.3329 123.028 77.1083 127.649 77.1083C132.269 77.1083 132.588 76.8409 135.084 76.3062C137.58 75.7714 139.864 74.8089 141.962 73.4186V76.4666H154.973V46.682C154.973 43.1528 154.522 40.0246 153.619 37.2708V37.2975ZM127.914 65.8254C118.992 65.8254 111.742 58.5263 111.742 49.5429C111.742 40.5594 118.992 33.2603 127.914 33.2603C136.836 33.2603 128.047 33.2603 128.127 33.2603C128.153 33.2603 128.18 33.2603 128.233 33.2603C128.286 33.2603 128.312 33.2603 128.339 33.2603C130.171 33.2603 131.95 33.6079 133.65 34.303C133.73 34.3298 133.783 34.3565 133.862 34.3832C134.022 34.4367 134.181 34.5169 134.34 34.5971C140.076 37.1104 144.086 42.8587 144.086 49.5429C144.086 56.227 136.836 65.8254 127.914 65.8254Z" fill="#5E1917"/>
+            <path d="M112.539 5.72162V18.6889H121.037V64.3014C123.134 65.2907 125.445 65.8254 127.914 65.8254C130.384 65.8254 133.039 65.1837 135.217 64.0608V5.72162H112.539Z" fill="#D24E01"/>
+            <path d="M7.64766 95.3159C8.55052 95.3159 9.37371 95.102 10.1172 94.6742C10.8608 94.2464 11.4715 93.6582 11.9495 92.9363L13.5428 93.9791C13.2507 94.4603 12.8789 94.9148 12.4541 95.3159C12.0292 95.7169 11.5512 96.0378 11.0467 96.3319C10.5421 96.626 10.011 96.8399 9.42682 96.9736C8.84262 97.134 8.25842 97.1874 7.64766 97.1874C6.66513 97.1874 5.76227 97.0003 4.91252 96.626C4.06277 96.2517 3.31924 95.7704 2.68192 95.1287C2.04461 94.4871 1.54007 93.7652 1.19486 92.9096C0.82309 92.054 0.637207 91.1717 0.637207 90.2092C0.637207 89.2467 0.82309 88.3109 1.19486 87.4553C1.56662 86.5998 2.07116 85.8511 2.68192 85.2362C3.31924 84.5945 4.06277 84.1133 4.91252 83.739C5.76227 83.3646 6.66513 83.1775 7.64766 83.1775C8.63018 83.1775 8.84262 83.2577 9.42682 83.3914C10.011 83.5518 10.5421 83.7657 11.0467 84.0331C11.5512 84.3004 12.0026 84.648 12.4275 85.049C12.8524 85.4501 13.1976 85.8779 13.4897 86.3859L11.8964 87.4286C11.445 86.7067 10.8342 86.1185 10.0907 85.6907C9.32061 85.2629 8.49741 85.049 7.6211 85.049C6.7448 85.049 6.26681 85.1827 5.6295 85.4501C5.01874 85.7175 4.46109 86.0918 4.00966 86.5463C3.55823 87.0008 3.18646 87.5623 2.92091 88.1772C2.65537 88.7922 2.52259 89.4873 2.52259 90.2092C2.52259 90.9311 2.65537 91.5728 2.92091 92.1877C3.18646 92.8026 3.55823 93.3374 4.00966 93.8186C4.46109 94.2732 5.01874 94.6475 5.6295 94.9148C6.24026 95.1822 6.90413 95.3159 7.59455 95.3159H7.64766Z" fill="#5E1917"/>
+            <path d="M18.2695 90.2092C18.2695 89.2467 18.4554 88.3376 18.8272 87.4821C19.1989 86.6265 19.6769 85.8779 20.3142 85.2362C20.9516 84.5945 21.6685 84.1133 22.5448 83.739C23.4211 83.3646 24.2975 83.1775 25.28 83.1775C26.2625 83.1775 27.1654 83.3646 28.0151 83.739C28.8649 84.1133 29.6084 84.5945 30.2457 85.2362C30.883 85.8779 31.361 86.5998 31.7328 87.4821C32.1045 88.3376 32.2904 89.2467 32.2904 90.2092C32.2904 91.1717 32.1045 92.054 31.7328 92.9096C31.361 93.7652 30.883 94.5138 30.2457 95.1287C29.6084 95.7704 28.8914 96.2517 28.0151 96.626C27.1654 97.0003 26.2625 97.1874 25.28 97.1874C24.2975 97.1874 23.3946 97.0003 22.5448 96.626C21.6951 96.2517 20.9516 95.7704 20.3142 95.1287C19.6769 94.4871 19.1989 93.7652 18.8272 92.9096C18.4554 92.054 18.2695 91.1717 18.2695 90.2092ZM20.1815 90.2092C20.1815 90.9044 20.3142 91.5728 20.5798 92.1877C20.8453 92.8026 21.2171 93.3374 21.6685 93.8186C22.12 94.2732 22.6776 94.6475 23.2884 94.9148C23.8991 95.1822 24.563 95.3159 25.28 95.3159C25.997 95.3159 26.6343 95.1822 27.245 94.9148C27.8558 94.6475 28.3869 94.2732 28.8649 93.8186C29.3429 93.3641 29.6881 92.8026 29.9536 92.1877C30.2192 91.5728 30.3519 90.9044 30.3519 90.2092C30.3519 89.5141 30.2192 88.8189 29.9536 88.1772C29.6881 87.5623 29.3163 87.0008 28.8649 86.5463C28.4134 86.0918 27.8558 85.7175 27.245 85.4501C26.6343 85.1827 25.9704 85.049 25.28 85.049C24.5896 85.049 23.9257 85.1827 23.2884 85.4501C22.6776 85.7175 22.12 86.0918 21.6685 86.5463C21.2171 87.0008 20.8453 87.5623 20.5798 88.1772C20.3142 88.7922 20.1815 89.4873 20.1815 90.2092Z" fill="#5E1917"/>
+            <path d="M37.9733 83.4716H40.018L47.1613 93.7652V83.4716H49.0732V96.8934H47.0551L39.8587 86.4394V96.8934H37.9468V83.4716H37.9733Z" fill="#5E1917"/>
+            <path d="M62.8019 86.2255C62.6691 86.065 62.4832 85.9313 62.2973 85.7709C62.0849 85.6105 61.8459 85.4768 61.5804 85.3699C61.3148 85.2629 61.0227 85.156 60.704 85.1025C60.3854 85.0223 60.0667 84.9956 59.7481 84.9956C58.978 84.9956 58.3938 85.156 57.9689 85.4768C57.544 85.7977 57.3316 86.2522 57.3316 86.8137C57.3316 87.3751 57.3847 87.3751 57.5175 87.589C57.6503 87.8029 57.8096 87.9901 58.022 88.1772C58.2345 88.3376 58.5 88.4981 58.7656 88.605C59.0577 88.7387 59.3498 88.8456 59.6684 88.9526C60.173 89.1397 60.7306 89.3002 61.2883 89.514C61.8725 89.7012 62.377 89.9418 62.8815 90.2359C63.3595 90.53 63.7578 90.9044 64.0765 91.3589C64.3952 91.8134 64.5545 92.4283 64.5545 93.1502C64.5545 93.8721 64.4483 94.2999 64.2093 94.7812C63.9703 95.2624 63.6516 95.6635 63.2267 96.011C62.8019 96.3586 62.2973 96.5992 61.7131 96.7864C61.1289 96.9736 60.4916 97.0538 59.7746 97.0538C59.0577 97.0538 58.6328 97.0003 58.1017 96.8933C57.5706 96.7864 57.0926 96.626 56.6677 96.4388C56.2428 96.2517 55.8711 96.0645 55.5524 95.8506C55.2338 95.6367 54.9948 95.4496 54.8354 95.2624L56.0039 93.8454C56.1366 93.9791 56.296 94.1127 56.535 94.2732C56.7739 94.4336 57.0395 94.5673 57.3847 94.7277C57.7299 94.8881 58.0751 94.995 58.4734 95.102C58.8718 95.2089 59.3232 95.2624 59.7746 95.2624C60.6244 95.2624 61.3148 95.0753 61.8193 94.7277C62.3239 94.3801 62.5894 93.8988 62.5894 93.2839C62.5894 92.669 62.5098 92.6422 62.3504 92.4283C62.1911 92.1877 61.9787 91.9738 61.7131 91.8134C61.4476 91.6262 61.1289 91.4926 60.7837 91.3321C60.4385 91.1985 60.0667 91.0648 59.6684 90.9578C59.1639 90.7974 58.6593 90.6102 58.1548 90.4498C57.6503 90.2627 57.1723 90.022 56.7474 89.7279C56.3225 89.4338 55.9773 89.0595 55.7118 88.6317C55.4462 88.1772 55.3134 87.6425 55.3134 87.0008C55.3134 86.3591 55.4197 85.8779 55.6321 85.4234C55.8445 84.9421 56.1366 84.5678 56.535 84.2202C56.9333 83.8726 57.3847 83.632 57.9424 83.4716C58.5 83.2844 59.0842 83.2042 59.7481 83.2042C60.4119 83.2042 61.5007 83.3646 62.2708 83.6587C63.0409 83.9528 63.5985 84.3539 63.9968 84.8351L62.7753 86.2522L62.8019 86.2255Z" fill="#5E1917"/>
+            <path d="M70.1044 83.4716H72.0163V91.4391C72.0163 92.0273 72.1225 92.562 72.3084 93.0433C72.4943 93.5246 72.7599 93.9256 73.0785 94.2465C73.3972 94.5673 73.822 94.8347 74.2735 95.0218C74.7515 95.209 75.256 95.2892 75.8402 95.2892C76.4244 95.2892 76.9289 95.209 77.3804 95.0218C77.8584 94.8347 78.2567 94.5673 78.5753 94.2465C78.9206 93.9256 79.1861 93.4978 79.3454 93.0433C79.5313 92.562 79.611 92.0273 79.611 91.4391V83.4716H81.5229V91.4659C81.5229 92.3749 81.3636 93.177 81.0715 93.8721C80.7794 94.5673 80.3545 95.1822 79.8234 95.6635C79.2923 96.1447 78.7081 96.5191 78.0177 96.7864C77.3273 97.0538 76.5837 97.1875 75.8137 97.1875C75.0436 97.1875 74.3 97.0538 73.5831 96.7864C72.8926 96.5191 72.2819 96.1447 71.7508 95.6635C71.2197 95.1822 70.8214 94.5673 70.5027 93.8721C70.2106 93.177 70.0513 92.3749 70.0513 91.4659V83.4716H70.1044Z" fill="#5E1917"/>
+            <path d="M97.1903 96.8934H88.082V83.4716H89.994V95.0753H97.2169V96.8934H97.1903Z" fill="#5E1917"/>
+            <path d="M109.724 85.2897H105.502V96.8934H103.59V85.2897H99.3413V83.4716H109.724V85.2897Z" fill="#5E1917"/>
+            <path d="M117.213 96.8934H115.301V83.4716H117.213V96.8934Z" fill="#5E1917"/>
+            <path d="M123.745 83.4716H125.79L132.933 93.7652V83.4716H134.845V96.8934H132.827L125.63 86.4394V96.8934H123.718V83.4716H123.745Z" fill="#5E1917"/>
+            <path d="M154.336 90.7707C154.309 91.7332 154.123 92.5888 153.831 93.3641C153.513 94.1395 153.061 94.8079 152.477 95.3961C151.893 95.9576 151.202 96.4121 150.379 96.7062C149.556 97.027 148.627 97.1874 147.591 97.1874C146.555 97.1874 145.706 97.0003 144.856 96.626C144.006 96.2517 143.263 95.7704 142.625 95.1287C141.988 94.4871 141.51 93.7652 141.138 92.9096C140.766 92.054 140.581 91.1717 140.581 90.2092C140.581 89.2467 140.766 88.3109 141.138 87.4553C141.51 86.5998 141.988 85.8511 142.625 85.2362C143.263 84.5945 144.006 84.1133 144.856 83.739C145.706 83.3646 146.635 83.1775 147.591 83.1775C148.547 83.1775 148.786 83.2577 149.37 83.4181C149.954 83.5785 150.485 83.7924 150.99 84.0598C151.495 84.3272 151.946 84.6747 152.371 85.0758C152.796 85.4768 153.141 85.9314 153.433 86.4126L151.84 87.4286C151.388 86.7067 150.804 86.1185 150.034 85.6907C149.291 85.2629 148.441 85.049 147.538 85.049C146.635 85.049 146.184 85.1827 145.546 85.4501C144.936 85.7175 144.378 86.0918 143.926 86.5463C143.475 87.0008 143.103 87.5623 142.838 88.1772C142.572 88.7922 142.439 89.4873 142.439 90.2092C142.439 90.9311 142.572 91.5728 142.838 92.1877C143.103 92.8026 143.475 93.3374 143.926 93.8186C144.378 94.2732 144.936 94.6475 145.546 94.9148C146.157 95.1822 146.821 95.3159 147.511 95.3159C148.786 95.3159 149.822 95.0218 150.671 94.4336C151.521 93.8454 152.026 92.9898 152.212 91.8134H147.538V90.0755H154.283V90.7707H154.336Z" fill="#5E1917"/>
+          </svg>
+        </p>
+        <p class="footer__tag">Consulenza strategica per l'apertura di hotel e ristoranti di lusso nel Nord Italia e a Firenze.</p>
+      </div>
+      <div>
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="#servizi">Hotel di lusso</a></li>
+          <li><a href="#servizi">Ristorante di lusso</a></li>
+          <li><a href="#servizi">Interior design &amp; concept</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sito</h4>
+        <ul>
+          <li><a href="#servizi">Servizi</a></li>
+          <li><a href="#chi-siamo">Chi Siamo</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="mailto:info@twaconsulting.it">info@twaconsulting.it</a></li>
+          <li><a href="#">Milano · Nord Italia</a></li>
+          <li><a href="#">Firenze</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 TWA Consulting — Filippo Mori. Tutti i diritti riservati.</span>
+      <span>Realizzato da meravigliaLab</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav: sfondo opaco allo scroll (trasparente su hero)
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+  </script>
+</body>
+</html>

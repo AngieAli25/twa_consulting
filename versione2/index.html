@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TWA Consulting — Consulenza esclusiva per hotel e ristoranti di lusso</title>
+  <meta name="description" content="TWA Consulting: consulenza strategica e creativa per l'apertura di hotel e ristoranti di lusso a Milano, nel Nord Italia e a Firenze. Location scouting, concept, business plan, interior design.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=80">
+  <style>
+    /* Switcher versioni home (indipendente dal CSS principale) */
+    .nav-version{display:inline-flex;align-items:center;gap:.15rem;padding:.2rem;margin-left:1rem;border:1px solid rgba(28,17,9,.25);border-radius:999px;vertical-align:middle}
+    .nav-version a,.nav-version span{font:700 .7rem/1 'Monda',system-ui,sans-serif;text-transform:uppercase;letter-spacing:.14em;padding:.3rem .7rem;border-radius:999px;color:#1C1109;text-decoration:none}
+    .nav-version .is-current{background:#D24E01;color:#fff}
+    .nav-version a:hover{background:#FCECCC}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Salta al contenuto principale</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">TWA<span>Consulting</span></a>
+      <nav class="nav-primary" aria-label="Navigazione principale">
+        <ul>
+          <li><a href="servizi.html">Servizi</a></li>
+          <li><a href="chi-siamo.html">Chi Siamo</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+        <a href="contatti.html" class="btn btn-primary">Prenota consulenza</a>
+        <span class="nav-version" role="group" aria-label="Cambia versione della home">
+          <a href="../index.html">V1</a>
+          <span class="is-current" aria-current="true">V2</span>
+        </span>
+      </nav>
+      <button class="nav-toggle" aria-label="Apri il menu di navigazione" aria-expanded="false" aria-controls="mobile-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobile-menu">
+    <button class="close-btn" aria-label="Chiudi il menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </button>
+    <ul>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+      <li><a href="contatti.html" class="btn btn-primary">Prenota consulenza</a></li>
+      <li><a href="../index.html">← Vai alla Versione 1</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=80" alt="Lobby di un hotel di lusso con luce calda e arredi ricercati">
+      </div>
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-title">
+              <span class="eyebrow on-dark">TWA Consulting</span>
+              <h1 id="hero-heading" class="h-display">La location<br>perfetta.</h1>
+            </div>
+            <div class="hero-card">
+              <p>Consulenza esclusiva per hotel e ristoranti di lusso a Milano e nel Nord Italia. Il network, il territorio, l'esperienza diretta di chi l'ha già fatto.</p>
+              <div class="hero-actions">
+                <a href="contatti.html" class="btn btn-primary">Prenota una consulenza</a>
+                <a href="servizi.html" class="btn btn-secondary">Scopri i servizi</a>
+              </div>
+            </div>
+          </div>
+          <p class="hero-geo">Milano · Nord Italia · Firenze</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Milano</span><span>Nord Italia</span><span>Firenze</span><span>Guida Michelin</span><span>Consulenza esclusiva</span><span>Location scouting</span>
+        <span>Milano</span><span>Nord Italia</span><span>Firenze</span><span>Guida Michelin</span><span>Consulenza esclusiva</span><span>Location scouting</span>
+      </div>
+    </div>
+
+    <section class="section bg-white" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-teaser">
+          <div class="portrait">
+            <img src="assets/fm-portrait-placeholder.svg" alt="Segnaposto ritratto di Filippo Mori, in attesa della foto ufficiale" loading="lazy">
+          </div>
+          <div>
+            <span class="eyebrow">Chi Siamo</span>
+            <h2 id="about-heading" class="h2">Un'esperienza unica,<br>nata dal campo.</h2>
+            <p class="lede">Filippo Mori non è un consulente da ufficio. Ha vissuto il mondo dell'hospitality dall'interno — come Art Director internazionale, come ristoratore premiato dalla Guida Michelin, come manager di acquisizioni da centinaia di milioni di euro. Oggi mette tutto questo al servizio di chi vuole aprire a Milano e nel Nord Italia.</p>
+            <a href="chi-siamo.html" class="btn-text">Leggi la storia completa →</a>
+            <div class="stat-grid">
+              <div><span class="stat-num">45+</span><span class="stat-label">Anni di esperienza</span></div>
+              <div><span class="stat-num">20+</span><span class="stat-label">Brand internazionali</span></div>
+              <div><span class="stat-num">100–300M€</span><span class="stat-label">Acquisizioni gestite</span></div>
+              <div><span class="stat-num">3</span><span class="stat-label">Continenti</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-sand" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Servizi</span>
+          <h2 id="services-heading" class="h2">Consulenza su misura<br>per l'eccellenza.</h2>
+          <p class="lede mt-lg">Ogni progetto è unico. Lavoriamo a fianco del cliente in ogni fase — dalla ricerca della location all'ottimizzazione del ritorno sull'investimento.</p>
+        </div>
+        <div>
+          <a href="servizi.html#hotel" class="service-row">
+            <span class="service-num">01</span>
+            <span class="service-info">
+              <span class="h3">Hotel di Lusso</span>
+              <p>Ricerca location, due diligence immobiliare, posizionamento del brand e business plan per l'apertura.</p>
+            </span>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="servizi.html#ristorante" class="service-row">
+            <span class="service-num">02</span>
+            <span class="service-info">
+              <span class="h3">Ristorante di Lusso</span>
+              <p>Scouting location, concept gastronomico, posizionamento nel mercato milanese e financial modeling.</p>
+            </span>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="servizi.html#interior" class="service-row">
+            <span class="service-num">03</span>
+            <span class="service-info">
+              <span class="h3">Interior Design &amp; Concept</span>
+              <p>Progettazione degli spazi, identità visiva e coordinamento cantiere per ambienti distintivi.</p>
+            </span>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-dark proof" aria-labelledby="proof-heading">
+      <div class="proof-media">
+        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1800&q=80" alt="" loading="lazy">
+      </div>
+      <div class="container">
+        <div class="proof-badge">
+          <span class="eyebrow on-dark" id="proof-heading">Guida Michelin</span>
+          <span class="caption">Conquistata in soli 2 anni · Divino Restaurant &amp; Lounge · Marina di Varazze</span>
+        </div>
+        <blockquote class="proof-quote">
+          "Ho vissuto il mondo della ristorazione e dell'hotellerie dall'interno. Oggi metto questa esperienza al servizio di chi vuole creare qualcosa di davvero straordinario."
+          <cite>— Filippo Mori</cite>
+        </blockquote>
+
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <p>"Filippo ha trovato la location perfetta in due settimane. Un network che non ha eguali."</p>
+            <footer>Marco R., Imprenditore, Milano</footer>
+          </article>
+          <article class="testimonial-card">
+            <p>"Il suo approccio va ben oltre la semplice ricerca: costruisce un progetto vero."</p>
+            <footer>Laura B., Investitrice, Firenze</footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="featured-band">
+      <div class="container">
+        <span class="featured-label">Credenziali</span>
+        <span class="item">Guida Michelin in 2 anni</span>
+        <span class="item">45+ anni di esperienza internazionale</span>
+        <span class="item">100–300M€ in acquisizioni gestite</span>
+        <span class="item">20+ brand di fama internazionale</span>
+      </div>
+    </div>
+
+    <section class="section bg-white" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">L'universo estetico</span>
+          <h2 id="gallery-heading" class="h2">Il linguaggio visivo<br>dei nostri progetti.</h2>
+          <p class="lede mt-lg">I case study sono riservati per accordo di riservatezza con i nostri clienti. Questi riferimenti raccontano lo standard estetico a cui lavoriamo.</p>
+        </div>
+        <div class="gallery-grid">
+          <a href="portfolio.html" class="g1">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80" alt="Sala ristorante di lusso con illuminazione soffusa e tavoli eleganti" loading="lazy">
+          </a>
+          <a href="portfolio.html" class="g2">
+            <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=900&q=80" alt="Facciata di un boutique hotel nel Nord Italia" loading="lazy">
+          </a>
+          <a href="portfolio.html" class="g3">
+            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=700&q=80" alt="Piatto gourmet servito in un ristorante stellato" loading="lazy">
+          </a>
+          <a href="portfolio.html" class="g4">
+            <img src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=700&q=80" alt="Interior design di un salotto in stile contemporaneo" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="cta-heading">
+      <div class="container">
+        <span class="eyebrow">Consulenza esclusiva</span>
+        <h2 id="cta-heading" class="h1">Hai un progetto in mente?<br>Parliamo.</h2>
+        <p class="lede">Un incontro riservato con Filippo Mori per valutare le opportunità disponibili e costruire la strategia giusta per il tuo progetto.</p>
+        <a href="contatti.html" class="btn btn-primary">Contattaci ora →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">TWA<span>Consulting</span></a>
+          <p>Consulenza strategica per l'apertura di hotel e ristoranti di lusso nel Nord Italia e a Firenze.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Naviga</h4>
+          <ul>
+            <li><a href="chi-siamo.html">Chi Siamo</a></li>
+            <li><a href="servizi.html">Servizi</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contatti.html">Contatti</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contatti</h4>
+          <ul>
+            <li><a href="mailto:info@twaconsulting.it">info@twaconsulting.it</a></li>
+            <li><span>Milano · Nord Italia · Firenze</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 TWA Consulting — Filippo Mori. Tutti i diritti riservati.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
