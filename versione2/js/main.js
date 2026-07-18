@@ -44,4 +44,11 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeMenu();
   });
+
+  // --- Link segnaposto (Servizi, Chi Siamo, Portfolio, Contatti): non portano a nulla ---
+  document.querySelectorAll('a[href="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+  });
 })();
